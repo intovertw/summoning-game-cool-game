@@ -9,14 +9,10 @@ public class playerMovement : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 movement;
 
-    public GameObject gameobject;
-    public Vector3 scale;
-
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
     }
 
     void FixedUpdate() 
@@ -52,11 +48,11 @@ public class playerMovement : MonoBehaviour
 
         if (movement.x > 0.01)
         {
-            animator.SetBool("mirror", true);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         if (movement.x < -0.01)
         {
-            animator.SetBool("mirror", false);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
     }
 }
