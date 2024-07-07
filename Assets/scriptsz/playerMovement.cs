@@ -12,6 +12,7 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //changed the way movement values are gotten so moving diagonally doesnt move you faster (.normalized part)
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
     }
 
