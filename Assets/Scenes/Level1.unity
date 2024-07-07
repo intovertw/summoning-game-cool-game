@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: summoner
       objectReference: {fileID: 0}
+    - target: {fileID: 1160356261127867848, guid: ffc61e4b5d58d1f4aae1352e27cec7d1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c428ce88b16c7f7489631539d6208441, type: 2}
     - target: {fileID: 7878350319992209165, guid: ffc61e4b5d58d1f4aae1352e27cec7d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5372,8 +5376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c55b67c211c4548882a3f91d5aa86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 2136058284}
   moveSpeed: 5
   rb: {fileID: 2136058283}
+  gameobject: {fileID: 0}
+  scale: {x: 0, y: 0, z: 0}
 --- !u!4 &2136058282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: ffc61e4b5d58d1f4aae1352e27cec7d1, type: 3}
@@ -5406,6 +5413,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &2136058284 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1160356261127867848, guid: ffc61e4b5d58d1f4aae1352e27cec7d1, type: 3}
+  m_PrefabInstance: {fileID: 725098173}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
