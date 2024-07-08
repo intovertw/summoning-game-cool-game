@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: summoner
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: ffc61e4b5d58d1f4aae1352e27cec7d1, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1160356261127867848, guid: ffc61e4b5d58d1f4aae1352e27cec7d1, type: 3}
       propertyPath: m_Controller
       value: 
@@ -5364,6 +5368,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToPlace: {fileID: 7614698459600573170, guid: c366ea5174c27b644ba524ee4498713c, type: 3}
   placementRange: 5
+  rb: {fileID: 2136058283}
+  animator: {fileID: 2136058284}
 --- !u!114 &2136058279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5379,8 +5385,6 @@ MonoBehaviour:
   animator: {fileID: 2136058284}
   moveSpeed: 5
   rb: {fileID: 2136058283}
-  gameobject: {fileID: 0}
-  scale: {x: 0, y: 0, z: 0}
 --- !u!4 &2136058282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: ffc61e4b5d58d1f4aae1352e27cec7d1, type: 3}

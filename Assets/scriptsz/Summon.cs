@@ -9,7 +9,9 @@ public class Summon : MonoBehaviour
     private Camera mainCam;
     private bool placingMode = false; // Flag to indicate if we are in placing mode
     private Vector3 startPosition; // Starting position for placing the object
+    public Rigidbody2D rb;
 
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -22,17 +24,26 @@ public class Summon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-
+            animator.SetBool("isSummoning", true);
             StartPlacingMode();
         }
 
         if (placingMode)
         {
             UpdatePlacementPosition();
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
 
             if (Input.GetMouseButtonDown(0)) // Check for left mouse button click
             {
+                rb.constraints = RigidbodyConstraints2D.None;
+                animator.SetBool("isSummoning", false);
                 PlaceObject();
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                rb.constraints = RigidbodyConstraints2D.None;
+                animator.SetBool("isSummoning", false);
+                placingMode = false;
             }
         }
     }
