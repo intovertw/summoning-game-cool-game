@@ -12,6 +12,8 @@ public class Shooting : MonoBehaviour
     public bool canFire;
     private float timer;
     public float timeBetweenFiring;
+    
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class Shooting : MonoBehaviour
 
         if (!canFire)
         {
+            animator.SetBool("onClick", false);
             timer += Time.deltaTime;
             if(timer>timeBetweenFiring )
             {
@@ -39,6 +42,7 @@ public class Shooting : MonoBehaviour
 
         if (Input.GetMouseButton(0) && canFire)
         {
+            animator.SetBool("onClick", true);
             canFire = false;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
         }

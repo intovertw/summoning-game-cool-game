@@ -12,6 +12,8 @@ public class Summon : MonoBehaviour
     public Rigidbody2D rb;
 
     public Animator animator;
+    //used to disable shooting when in summoning mode
+    public GameObject shooting;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,7 @@ public class Summon : MonoBehaviour
             {
                 rb.constraints = RigidbodyConstraints2D.None;
                 animator.SetBool("isSummoning", false);
+                Invoke("enableShooting", 0.1f);
                 placingMode = false;
             }
         }
@@ -50,6 +53,7 @@ public class Summon : MonoBehaviour
     void StartPlacingMode()
     {
         placingMode = true;
+        shooting.SetActive(false);
         startPosition = transform.position; // Set starting position around the character
     }
 
@@ -81,8 +85,17 @@ public class Summon : MonoBehaviour
         {
             Instantiate(objectToPlace, objectToPlace.transform.position, objectToPlace.transform.rotation);
             objectToPlace.SetActive(false); // Deactivate the object after placing
+            Invoke("enableShooting", 0.1f);
             placingMode = false; // Exit placing mode
         }
+    }
+
+    //i have to make a function and just Invoke() it because i dont know any other way to delay enabling shooting
+    //if you dont delay it, you shoot as you summon a pet
+    //i dont wanna look for other ways to delay this. it works and that's that >:(
+    void enableShooting()
+    {
+        shooting.SetActive(true);
     }
 }
 
