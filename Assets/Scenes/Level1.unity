@@ -5490,7 +5490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176cf77b1cd59624ab2104a3f5a0d824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPlace: {fileID: 7614698459600573170, guid: c366ea5174c27b644ba524ee4498713c, type: 3}
+  objectToPlace: {fileID: 6662917173688450189, guid: c366ea5174c27b644ba524ee4498713c, type: 3}
   placementRange: 5
   rb: {fileID: 2136058283}
   animator: {fileID: 2136058284}
