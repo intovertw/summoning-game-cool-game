@@ -3,7 +3,7 @@ using UnityEngine;
 public class PetBullet : MonoBehaviour
 {
     public float bulletLifetime = 2f; // Lifetime of the bullet before it self-destructs
-    public float bulletDamage = 10f; // Amount of damage the bullet deals
+    public float bulletDamage = 10f; // Amount of damage the bullet deals   
 
     void Start()
     {

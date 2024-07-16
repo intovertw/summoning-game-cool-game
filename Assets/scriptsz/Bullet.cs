@@ -9,6 +9,10 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     public float force;
 
+    public float bulletLifetime = 2f; // Lifetime of the bullet before it self-destructs
+    public float bulletDamage = 10f; // Amount of damage the bullet deals   
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +33,32 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("enemy"))
+        {
+
+            enemyBehavior enemy = other.gameObject.GetComponent<enemyBehavior>();
+
+            if (enemy != null)
+            {
+
+                enemy.TakeHit(bulletDamage);
+            }
+            enemyTurretBehavior turret = other.gameObject.GetComponent<enemyTurretBehavior>();
+            if (turret != null)
+            {
+                turret.TakeHit(bulletDamage); // Apply damage to enemyTurretBehavior
+            }
+
+            else if (!other.gameObject.CompareTag("Player"))
+            {
+                Destroy(gameObject);
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

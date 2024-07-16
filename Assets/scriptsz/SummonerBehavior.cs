@@ -2,16 +2,22 @@ using UnityEngine;
 
 public class SummonerBehavior : MonoBehaviour
 {
-    public float maxHealth = 100f; // Maximum health of the player
-    public float currentHealth; // Current health of the player
     public float attackDamage = 10f; // Amount of damage the player deals per attack
     public float attackRange = 1.5f; // Range within which the player can attack
-    public Transform attackPoint; // Point where the attack originates (e.g., player's weapon)
-    public LayerMask enemyLayer; // Layer that contains enemies
+
+    [SerializeField] HealthbarBehavior Healthbar;
+    [SerializeField] float health, maxHealth; // Maximum health of the enemy
+    Rigidbody2D rb;
 
     void Start()
     {
-        currentHealth = maxHealth; // Initialize current health to max health
+        health = maxHealth; // Initialize health
+        Healthbar.UpdateHealthBar(health, maxHealth);
+    }
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        Healthbar = GetComponentInChildren<HealthbarBehavior>();
     }
 
     void Update()
@@ -19,31 +25,22 @@ public class SummonerBehavior : MonoBehaviour
         
     }
 
-    // UNDER WORK. DIDNT MANAGE THIS YET, 
-    /*void Attack()
+
+    public void TakeHit(float damage)
     {
-        // Example: Perform attack logic
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        // Reduce health by the amount of damage taken
+        health -= damage;
+        Healthbar.UpdateHealthBar(health, maxHealth);
 
-        foreach (Collider2D enemy in hitEnemies)
+        if (health <= 0)
         {
-            enemy.GetComponent<enemyBehavior>().TakeHit(attackDamage);
-        }
-    }*/
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage; // Reduce current health by the amount of damage
-
-        // Check if player health is zero or below
-        if (currentHealth <= 0)
-        {
-            Die(); // Call the Die() method if health is depleted
+            Die();
         }
     }
 
     void Die()
     {
-        
+
+        Destroy(gameObject);
     }
 }

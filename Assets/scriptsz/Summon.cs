@@ -9,15 +9,11 @@ public class Summon : MonoBehaviour
     private Camera mainCam;
     private bool placingMode = false; // Flag to indicate if we are in placing mode
     private Vector3 startPosition; // Starting position for placing the object
-<<<<<<< Updated upstream
+    public GameObject bulletSpawnPointPrefab; // Prefab for the bullet spawn 
     public Rigidbody2D rb;
 
     public Animator animator;
-=======
-    public GameObject bulletSpawnPointPrefab; // Prefab for the bullet spawn point
->>>>>>> Stashed changes
-
-    // Start is called before the first frame update
+    public GameObject shooting;
     void Start()
     {
         mainCam = Camera.main;
@@ -28,20 +24,16 @@ public class Summon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-<<<<<<< Updated upstream
             animator.SetBool("isSummoning", true);
-=======
->>>>>>> Stashed changes
             StartPlacingMode();
         }
 
         if (placingMode)
         {
             UpdatePlacementPosition();
-<<<<<<< Updated upstream
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
 
-            if (Input.GetMouseButtonDown(0)) // Check for left mouse button click
+            if (Input.GetMouseButtonDown(0)) 
             {
                 rb.constraints = RigidbodyConstraints2D.None;
                 animator.SetBool("isSummoning", false);
@@ -51,20 +43,12 @@ public class Summon : MonoBehaviour
             {
                 rb.constraints = RigidbodyConstraints2D.None;
                 animator.SetBool("isSummoning", false);
+                Invoke("enableShooting", 0.1f);
                 placingMode = false;
             }
         }
     }
-=======
 
-            if (Input.GetMouseButtonDown(0)) 
-            {
-                PlaceObject();
-            }
-        }
-    }
-
->>>>>>> Stashed changes
     void StartPlacingMode()
     {
         placingMode = true;
@@ -74,11 +58,7 @@ public class Summon : MonoBehaviour
     void UpdatePlacementPosition()
     {
         Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-<<<<<<< Updated upstream
-        mousePos.z = 0; // Ensure the z position is 0 to place the object in 2D space
-=======
         mousePos.z = 0;
->>>>>>> Stashed changes
         Vector3 direction = mousePos - startPosition;
         direction = direction.normalized;
 
@@ -86,20 +66,12 @@ public class Summon : MonoBehaviour
         float distanceToCharacter = Vector3.Distance(startPosition, mousePos);
         if (distanceToCharacter <= placementRange)
         {
-<<<<<<< Updated upstream
-            objectToPlace.SetActive(true); // Ensure the object is active to show during placement
-=======
             objectToPlace.SetActive(true);
->>>>>>> Stashed changes
             objectToPlace.transform.position = mousePos;
         }
         else
         {
-<<<<<<< Updated upstream
-            objectToPlace.SetActive(true); // Hide the object if it's out of range
-=======
             objectToPlace.SetActive(true);
->>>>>>> Stashed changes
             Vector3 targetPos = startPosition + direction * placementRange;
             objectToPlace.transform.position = targetPos;
         }
@@ -109,15 +81,6 @@ public class Summon : MonoBehaviour
     {
         if (objectToPlace.activeSelf) // Only place the object if it's currently active (within range)
         {
-<<<<<<< Updated upstream
-            Instantiate(objectToPlace, objectToPlace.transform.position, objectToPlace.transform.rotation);
-            objectToPlace.SetActive(false); // Deactivate the object after placing
-            placingMode = false; // Exit placing mode
-        }
-    }
-}
-
-=======
             GameObject placedObject = Instantiate(objectToPlace, objectToPlace.transform.position, objectToPlace.transform.rotation);
             objectToPlace.SetActive(false); 
             placingMode = false; 
@@ -129,4 +92,3 @@ public class Summon : MonoBehaviour
         }
     }
 }
->>>>>>> Stashed changes

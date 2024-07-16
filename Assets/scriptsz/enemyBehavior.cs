@@ -6,15 +6,22 @@ public class enemyBehavior : MonoBehaviour
     public float stoppingDistance = 2f; // Distance at which the enemy stops approaching the player
     public float attackDamage = 10f; // Amount of damage the enemy deals per attack
     private Transform player; // Reference to the player's transform
-    public HealthbarBehavior Healthbar;
-    public float maxHealth = 100f; // Maximum health of the enemy
-    private float currentHealth; // Current health of the enemy
+    [SerializeField] HealthbarBehavior Healthbar;
+    [SerializeField] float health, maxHealth; // Maximum health of the enemy
+    
+    Rigidbody2D rb;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform; 
-        currentHealth = maxHealth;
-        Healthbar.SetHealth(currentHealth, maxHealth);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        Healthbar.UpdateHealthBar(health, maxHealth);
+
+    }
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        Healthbar = GetComponentInChildren<HealthbarBehavior>();
     }
 
     void Update()
@@ -50,10 +57,10 @@ public class enemyBehavior : MonoBehaviour
     public void TakeHit(float damage)
     {
         // Reduce health by the amount of damage taken
-        currentHealth -= damage;
-        Healthbar.SetHealth(currentHealth, maxHealth);
+        health -= damage;
+        Healthbar.UpdateHealthBar(health, maxHealth);
      
-        if (currentHealth <= 0)
+        if (health <= 0)
         {
             Die(); 
         }

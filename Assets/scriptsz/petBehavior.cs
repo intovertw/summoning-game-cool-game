@@ -8,14 +8,25 @@ public class petBehavior : MonoBehaviour
     public float shootingInterval = 1.0f; // Time between shots
     public float bulletSpeed = 5f; // Speed of the bullet
     public float detectionRange = 10f; // Range within which the pet detects and shoots at enemies
-    public float cooldownTime = 10f; // Time after which the pet will disappear
-    [HideInInspector]
-    public Transform bulletSpawnPoint; 
+    public float cooldownTime; // Time after which the pet will disappear
+   
+    public Transform bulletSpawnPoint;
 
     private Transform target;
+    private Transform aimTransform;
+    public Animator animator;
+
 
     void Start()
     {
+
+        // Create an empty GameObject for aiming
+        aimTransform = new GameObject("AimTransform").transform;
+        aimTransform.SetParent(transform, false);
+        animator.SetBool("Enter", true);
+        // Schedule the pet to start the Idle animation after half the cooldown time
+        Invoke("StartIdleAnimation", cooldownTime / 2);
+
         InvokeRepeating("ShootAtEnemy", shootingInterval, shootingInterval);
         Invoke("Disappear", cooldownTime); // Schedule the pet to disappear after cooldownTime seconds
     }
@@ -25,11 +36,11 @@ public class petBehavior : MonoBehaviour
         FindTarget();
         if (target != null && bulletSpawnPoint != null)
         {
-           
-            Vector3 direction = target.position - transform.position;
+            // Update aimTransform rotation instead of the prefab's rotation
+            Vector3 direction = target.position - aimTransform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = rotation;
+            aimTransform.rotation = rotation;
         }
     }
 
@@ -68,9 +79,15 @@ public class petBehavior : MonoBehaviour
         }
     }
 
+    void StartIdleAnimation()
+    {
+        // Stop the Enter animation and start the Idle animation
+        animator.SetBool("Enter", false);
+        animator.SetBool("Idle", true);
+    }
+
     void Disappear()
     {
-
         Destroy(gameObject);
     }
 }
