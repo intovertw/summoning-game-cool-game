@@ -11,26 +11,26 @@ public class enemyBullet : MonoBehaviour
         Destroy(gameObject, bulletLifetime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+  
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            // If the bullet collides with the player, apply damage
-            SummonerBehavior playerHealth = collision.gameObject.GetComponent<SummonerBehavior>();
-            if (playerHealth != null)
+
+            SummonerBehavior player = other.gameObject.GetComponent<SummonerBehavior>();
+
+            if (player != null)
             {
-                playerHealth.TakeHit(damage); // Apply damage to the player
+
+                player.TakeHit(damage);
             }
-            Destroy(gameObject); // Destroy the bullet after hitting the player
-        }
-        else if (collision.gameObject.CompareTag("enemy"))
-        {
-            // If the bullet collides with another enemy, just destroy the bullet without applying damage
-            Destroy(gameObject);
-        }
-        else
-        {
-            // Destroy the bullet on any other collision as well (e.g., walls or obstacles)
+
+            else if (!other.gameObject.CompareTag("enemy"))
+            {
+                Destroy(gameObject);
+            }
+
             Destroy(gameObject);
         }
     }

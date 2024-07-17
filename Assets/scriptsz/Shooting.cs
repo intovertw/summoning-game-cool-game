@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
+    public float attackDamage = 10f;
+    public float attackRange = 1.5f;
+    public float timeBetweenFiring = 1f; // Original time between firing
+    public float originalTimeBetweenFiring;
+
     private Camera mainCam;
     private Vector3 mousePos;
 
@@ -11,21 +16,19 @@ public class Shooting : MonoBehaviour
     public Transform bulletTransform;
     public bool canFire;
     private float timer;
-    public float timeBetweenFiring;
 
     public Animator animator;
 
-    // Start is called before the first frame update
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        originalTimeBetweenFiring = timeBetweenFiring;
     }
 
-    // Update is called once per frame
     void Update()
     {
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 rotation =  mousePos - transform.position;
+        Vector3 rotation = mousePos - transform.position;
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
@@ -33,7 +36,7 @@ public class Shooting : MonoBehaviour
         {
             animator.SetBool("onClick", false);
             timer += Time.deltaTime;
-            if(timer>timeBetweenFiring )
+            if (timer > timeBetweenFiring)
             {
                 canFire = true;
                 timer = 0;
@@ -46,5 +49,10 @@ public class Shooting : MonoBehaviour
             canFire = false;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
         }
+    }
+
+    public void UpdateShootingInterval(float multiplier)
+    {
+        timeBetweenFiring = originalTimeBetweenFiring * multiplier;
     }
 }
