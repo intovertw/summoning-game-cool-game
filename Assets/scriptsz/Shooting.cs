@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// This shooting is only applied to the child of Summoner. the shooting refers to the summoner's shooting mechanics. 
 public class Shooting : MonoBehaviour
 {
     public float attackDamage = 10f;
@@ -25,6 +27,7 @@ public class Shooting : MonoBehaviour
         originalTimeBetweenFiring = timeBetweenFiring;
     }
 
+    // Mousepoint Aim mechanics
     void Update()
     {
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);

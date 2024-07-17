@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class petBehavior : MonoBehaviour
 {
-    public GameObject bulletPrefab; // Prefab of the bullet
-    public float shootingInterval = 1.0f; // Time between shots
-    public float bulletSpeed = 5f; // Speed of the bullet
-    public float detectionRange = 10f; // Range within which the pet detects and shoots at enemies
+    public GameObject bulletPrefab; 
+    public float shootingInterval = 1.0f; 
+    public float bulletSpeed = 5f; 
+    public float detectionRange = 10f; 
     public float cooldownTime; // Time after which the pet will disappear
    
     public Transform bulletSpawnPoint;
@@ -16,19 +16,19 @@ public class petBehavior : MonoBehaviour
     private Transform aimTransform;
     public Animator animator;
 
-
+    //This actually works when I didnt apply the animation yet. Havent set up the limit of the Active Summoned pet... 
     void Start()
     {
 
-        // Create an empty GameObject for aiming
+        // Create empty GameObject for aiming
         aimTransform = new GameObject("AimTransform").transform;
         aimTransform.SetParent(transform, false);
         animator.SetBool("Enter", true);
-        // Schedule the pet to start the Idle animation after half the cooldown time
+       // For Animation idle -- tbh It doesnt work so I apologize for this TwT
         Invoke("StartIdleAnimation", cooldownTime / 2);
 
         InvokeRepeating("ShootAtEnemy", shootingInterval, shootingInterval);
-        Invoke("Disappear", cooldownTime); // Schedule the pet to disappear after cooldownTime seconds
+        Invoke("Disappear", cooldownTime); // Schedule the pet to disappear after Cooldown
     }
 
     void Update()
@@ -36,7 +36,7 @@ public class petBehavior : MonoBehaviour
         FindTarget();
         if (target != null && bulletSpawnPoint != null)
         {
-            // Update aimTransform rotation instead of the prefab's rotation
+            // Update aimTransform rotation instead of the pet otation
             Vector3 direction = target.position - aimTransform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -44,6 +44,7 @@ public class petBehavior : MonoBehaviour
         }
     }
 
+    // AutoAims Enemies in a certain distance.
     void FindTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
@@ -61,6 +62,7 @@ public class petBehavior : MonoBehaviour
         }
     }
 
+    //Shoots the enemy. (PetBulletSpawnPoint is assigned with this so the prefab wont rotate along the aiming)
     void ShootAtEnemy()
     {
         if (target != null && bulletSpawnPoint != null)
@@ -79,6 +81,7 @@ public class petBehavior : MonoBehaviour
         }
     }
 
+    // Attempting to do what you did with the animation. It doesnt actually work TwT
     void StartIdleAnimation()
     {
         // Stop the Enter animation and start the Idle animation

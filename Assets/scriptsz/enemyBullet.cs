@@ -3,11 +3,15 @@ using UnityEngine;
 public class enemyBullet : MonoBehaviour
 {
     public float damage = 10f;
-    public float bulletLifetime = 2f; // Lifetime of the bullet before it self-destructs
+    public float bulletLifetime = 2f; //It just destroys the bullet when didnt collide with anything within this seconds. 
 
     void Start()
     {
-        // Destroy the bullet after a certain amount of time to prevent clutter
+        // Set the layer of this bullet to EnemyBullet so that It will ignore the collision with the player bullet
+        gameObject.layer = LayerMask.NameToLayer("EnemyBullet");
+
+        // Ignore collisions between EnemyBullet and PlayerBullet layers
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("PlayerBullet"));
         Destroy(gameObject, bulletLifetime);
     }
 
@@ -15,6 +19,7 @@ public class enemyBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        //how enemy bullet hits player
         if (other.gameObject.CompareTag("Player"))
         {
 
@@ -25,7 +30,7 @@ public class enemyBullet : MonoBehaviour
 
                 player.TakeHit(damage);
             }
-
+            //this will destroy the bullet only so that it wont affect the enemy. Im thinking maybe I should just ignore the collider na din instead if madaming nakaharang na enemy sa harap. 
             else if (!other.gameObject.CompareTag("enemy"))
             {
                 Destroy(gameObject);

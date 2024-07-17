@@ -9,6 +9,8 @@ public class enemyBehavior : MonoBehaviour
     private Transform player; // Reference to the player's transform
     [SerializeField] HealthbarBehavior Healthbar;
     [SerializeField] float health, maxHealth; // Maximum health of the enemy
+    public float damageReductionFactor = 0.75f; // 25% damage reduction
+    private bool isBuffed = false;
 
     private Rigidbody2D rb;
     private float lastAttackTime;
@@ -54,6 +56,7 @@ public class enemyBehavior : MonoBehaviour
 
     void AttackPlayer()
     {
+        
         if (player != null && player.CompareTag("Player"))
         {
             SummonerBehavior playerHealth = player.GetComponent<SummonerBehavior>();
@@ -66,11 +69,13 @@ public class enemyBehavior : MonoBehaviour
 
     }
 
-
     public void TakeHit(float damage)
     {
-        // Reduce health by the amount of damage taken
-        health -= damage;
+        // Apply damage reduction if buffed. idk if it works but somehow it did :D
+        float finalDamage = isBuffed ? damage * damageReductionFactor : damage;
+
+        // Reduce health by the amount of reduced damage taken
+        health -= finalDamage;
         Healthbar.UpdateHealthBar(health, maxHealth);
 
         if (health <= 0)

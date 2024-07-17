@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//This script is responsible for summoning mechanics only. which works fine. you can adjust your desired placing range and placing summons here. 
 public class Summon : MonoBehaviour
 {
     public GameObject objectToPlace; // The object to place

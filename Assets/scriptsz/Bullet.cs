@@ -16,6 +16,8 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
@@ -24,6 +26,12 @@ public class Bullet : MonoBehaviour
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0,0,rot+90);
+
+        // Set the layer of this bullet to PlayerBullet for ignoreCollision purposes. 
+        gameObject.layer = LayerMask.NameToLayer("PlayerBullet");
+
+        // Ignore collisions between PlayerBullet and EnemyBullet layers
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("EnemyBullet"));
 
         Destroy(gameObject, 5f);
     }
@@ -50,7 +58,7 @@ public class Bullet : MonoBehaviour
             enemyTurretBehavior turret = other.gameObject.GetComponent<enemyTurretBehavior>();
             if (turret != null)
             {
-                turret.TakeHit(bulletDamage); // Apply damage to enemyTurretBehavior
+                turret.TakeHit(bulletDamage);
             }
 
             else if (!other.gameObject.CompareTag("Player"))
