@@ -4,29 +4,64 @@ using UnityEngine;
 
 public class playerStats : MonoBehaviour
 {
-    public float maxHealth = 10f, health, rateOfFire, speed, petHealth, petROF;
+    //player's and summon pet's statistics
+    public float 
+        maxHealth = 10f, 
+        health, 
+        rateOfFire, 
+        speed, 
+        petMaxAmount, 
+        petMaxHealth,
+        petRange,
+        petROF;
+    public GameObject[] petSummonsArray;
+    public int petAmount;
     healthBar bar;
+    petStats pet;
+    Summon summon;
 
+    //get health bar which is outside this script (healthBar.cs)
     void Awake()
     {
+        summon = GetComponentInChildren<Summon>();
         bar = GetComponentInChildren<healthBar>();
     }
 
+    //sets health with maxHealth value
     void Start()
     {
         health = maxHealth;
     }
 
-    // Update is called once per frame
+    //checks for health changes and updates healthBar.cs
     void Update()
     {
+        //health
+        bar.UpdateHealth(maxHealth, health);
+
         if (health > maxHealth)
         {
             health = maxHealth;
         }
         if (health <= 0)
         {
-            //DAED!!!!
+            Destroy(gameObject);
+        }
+
+        //pet
+        petSummonsArray = GameObject.FindGameObjectsWithTag("Pet");
+        petAmount = GameObject.FindGameObjectsWithTag("Pet").Length;
+
+        //manages 
+        int nextPet = 0;
+        if(petAmount > petMaxAmount - 1)
+        {
+            if (nextPet > petMaxAmount - 1)
+            {
+                nextPet = 0;
+            }
+            summon.objectToPlace = petSummonsArray[nextPet];
+            nextPet++;
         }
     }
 }

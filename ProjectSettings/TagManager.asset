@@ -9,11 +9,12 @@ TagManager:
   - Enemy
   - PlayerBullet
   - EnemyBullet
+  - Pet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 

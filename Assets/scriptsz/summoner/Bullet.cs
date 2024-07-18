@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //ery code block for boolet
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
@@ -24,9 +25,16 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 3f);
     }
 
-    void OnCollisionEnter(Collision2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        //handles collision, ignores player cause that would make the boolet disappear instantly
+        if (collision.gameObject.tag.Equals("Player") || collision.gameObject.tag.Equals("Pet"))
+        {
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-    
 }

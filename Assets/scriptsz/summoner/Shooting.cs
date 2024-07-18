@@ -42,6 +42,7 @@ public class Shooting : MonoBehaviour
 
     void shoot()
     {
+        //where all the shooting happens
         GameObject bullet = Instantiate(bulletPrefab, new Vector3(bulletSpawn.position.x, bulletSpawn.position.y + 0.5f, 0), Quaternion.identity);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(bulletSpawn.up * force, ForceMode2D.Impulse);

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: gunBooletprefab
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: c8b2a04d79c22464ea4456ba3e9e1e7a, type: 3}
+      propertyPath: m_TagString
+      value: PlayerBullet
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: c8b2a04d79c22464ea4456ba3e9e1e7a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -96,7 +100,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &-3662186407038850148
 BoxCollider2D:

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class slimestats : MonoBehaviour
 {
+    //slime's statistics
     public float
         maxHealth = 5f,
         health,
@@ -13,7 +14,7 @@ public class slimestats : MonoBehaviour
     enemyChase chaseScript;
     healthBar bar;
     
-
+    //get relevant values outside script (healthBar.cs and chase ai)
     void Awake()
     {
         chaseScript = GetComponentInChildren<enemyChase>();
@@ -22,13 +23,11 @@ public class slimestats : MonoBehaviour
         health = maxHealth;
     }
 
+    //just checks for health changes and updates the health bar with bar.UpdateHealth
     void Update()
     {
-        if (Input.GetKeyDown("e"))
-        {
-            health--;
-            bar.UpdateHealth(maxHealth, health);
-        }
+        bar.UpdateHealth(maxHealth, health);
+
         if (health > maxHealth)
         {
             health = maxHealth;

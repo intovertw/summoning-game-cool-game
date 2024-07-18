@@ -5,12 +5,13 @@ using UnityEngine;
 public class enemySpawner : MonoBehaviour
 {
     public GameObject[] enemies;
-    // Start is called before the first frame update
+
     void Start()
     {
         StartCoroutine(EnemySpawn());
     }
 
+    //basic random spawner
     IEnumerator EnemySpawn()
     {
         int random;

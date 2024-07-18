@@ -10,6 +10,7 @@ public class healthBar : MonoBehaviour
 
     public void UpdateHealth(float maxHealth, float health)
     {
+        //uses images in canvas to display health, this dictates how much green is in the bar
         bar.fillAmount = health / maxHealth;
     }
 }
