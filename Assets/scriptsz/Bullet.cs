@@ -21,13 +21,12 @@ public class Bullet : MonoBehaviour
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 180);
 
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 3f);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter(Collision2D collision)
     {
-
+        Destroy(gameObject);
     }
+    
 }

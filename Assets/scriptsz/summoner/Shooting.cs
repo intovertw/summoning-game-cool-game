@@ -9,6 +9,8 @@ public class Shooting : MonoBehaviour
     public float shootCooldown;
     static public bool canFire;
 
+    public Animator animator;
+
     public float force = 10f;
 
     void Start()
@@ -21,6 +23,7 @@ public class Shooting : MonoBehaviour
         if (Input.GetMouseButton(0) && canFire == true)
         {
             shoot();
+            animator.SetBool("onClick", true);
             StartCoroutine(Timer());
         }
     }
@@ -28,6 +31,9 @@ public class Shooting : MonoBehaviour
     IEnumerator Timer()
     {
         canFire = false;
+        yield return new WaitForSeconds(0.1f);
+        
+        animator.SetBool("onClick", false);
         yield return new WaitForSeconds(shootCooldown);
 
         canFire = true;
@@ -36,9 +42,7 @@ public class Shooting : MonoBehaviour
 
     void shoot()
     {
-        
         GameObject bullet = Instantiate(bulletPrefab, new Vector3(bulletSpawn.position.x, bulletSpawn.position.y + 0.5f, 0), Quaternion.identity);
-
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(bulletSpawn.up * force, ForceMode2D.Impulse);
     }
