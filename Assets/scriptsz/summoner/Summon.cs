@@ -96,6 +96,7 @@ public class Summon : MonoBehaviour
     void enableShooting()
     {
         shooting.SetActive(true);
+        Shooting.canFire = true;
     }
 }
 
