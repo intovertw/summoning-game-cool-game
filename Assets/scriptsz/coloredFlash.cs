@@ -63,7 +63,7 @@ public class coloredFlash : MonoBehaviour
         }
 
         // Start the Coroutine, and store the reference for it.
-        flashRoutine = StartCoroutine(FlashRoutine(Color.magenta));
+        flashRoutine = StartCoroutine(FlashRoutine(color));
     }
 
     private IEnumerator FlashRoutine(Color color)

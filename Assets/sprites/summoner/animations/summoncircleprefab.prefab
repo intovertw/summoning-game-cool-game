@@ -12,10 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: summoncircleprefab
       objectReference: {fileID: 0}
-    - target: {fileID: -2253911629886400664, guid: 82af5c22cdde1b14e813266cde689d58, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 82af5c22cdde1b14e813266cde689d58, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

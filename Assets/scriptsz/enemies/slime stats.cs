@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class slimestats : MonoBehaviour
 {
-    //slime's statistics
+    // Slime's statistics
     public float
         maxHealth = 5f,
         health,
         moveSpeed = 2f,
         attack = 1f,
         attackRate = 1f;
+
+    public float originalMoveSpeed;
+    public float originalAttack;
+
     enemyChase chaseScript;
     healthBar bar;
-    
-    //get relevant values outside script (healthBar.cs and chase ai)
+
+    // Get relevant values outside script (healthBar.cs and chase ai)
     void Awake()
     {
         chaseScript = GetComponentInChildren<enemyChase>();
         bar = GetComponentInChildren<healthBar>();
 
         health = maxHealth;
+        originalMoveSpeed = moveSpeed;
+        originalAttack = attack;
     }
 
-    //just checks for health changes and updates the health bar with bar.UpdateHealth
+    // Just checks for health changes and updates the health bar with bar.UpdateHealth
     void Update()
     {
         bar.UpdateHealth(maxHealth, health);

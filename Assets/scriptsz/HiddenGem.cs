@@ -1,59 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class HiddenGem : MonoBehaviour
 {
-    private GameObject[] slimeStatistics;
-    public LayerMask enemyMask;
-    public float originalSpeed, originalAttack;
-
     public float range = 5f;
+    public LayerMask enemy; 
+    public float buffedMoveSpeed = 4f; 
+    public float buffedAttack = 2f;
 
-    slimestats enemy;
-    // Start is called before the first frame update
-    void Start()
+    private List<slimestats> buffedEnemies = new List<slimestats>();
+
+    private void Awake()
     {
-        enemy = GetComponent<slimestats>();
-        originalSpeed = enemy.moveSpeed;
-        originalAttack = enemy.attack;
+        CircleCollider2D collider = gameObject.AddComponent<CircleCollider2D>();
+        collider.radius = range;
+        collider.isTrigger = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check if the collider belongs to an enemy
+        if (((1 << other.gameObject.layer) & enemy) != 0)
+        {
+            slimestats enemy = other.GetComponent<slimestats>();
+            if (enemy != null && !buffedEnemies.Contains(enemy))
+            {
+                // Save the original values to revert them later
+                enemy.originalMoveSpeed = enemy.moveSpeed;
+                enemy.originalAttack = enemy.attack;
+
+                // Apply the buff
+                enemy.moveSpeed = buffedMoveSpeed;
+                enemy.attack = buffedAttack;
+                buffedEnemies.Add(enemy);
+
+                Debug.Log("Buffed enemy!");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        // Check if the collider belongs to an enemy
+        if (((1 << other.gameObject.layer) & enemy) != 0)
+        {
+            slimestats enemy = other.GetComponent<slimestats>();
+            if (enemy != null && buffedEnemies.Contains(enemy))
+            {
+                // Revertbuff
+                enemy.moveSpeed = enemy.originalMoveSpeed;
+                enemy.attack = enemy.originalAttack;
+                buffedEnemies.Remove(enemy);
+
+                Debug.Log("Debuffed enemy!");
+            }
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
-        Handles.color = Color.red;
-        Handles.DrawWireDisc(new Vector3(transform.position.x, transform.position.y + 2, 0), transform.forward, range);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        slimeStatistics = GameObject.FindGameObjectsWithTag("Enemy");
-
-        for (int i = 0; i < slimeStatistics.Length; i++)
-        {
-            enemy = slimeStatistics[i].GetComponent<slimestats>();
-            enemy.moveSpeed = originalSpeed;
-            enemy.attack = originalAttack;
-        }
-        FindTarget();
-    }
-
-    void FindTarget()
-    {
-        slimeStatistics = GameObject.FindGameObjectsWithTag("Enemy");
-
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, range, (Vector2)transform.position, 0f, enemyMask);
-        if (hits.Length > 0)
-        {
-            for (int i = 0; i < hits.Length; i++)
-            {
-                enemy = slimeStatistics[i].GetComponent<slimestats>();
-                enemy.moveSpeed = 4f;
-                enemy.attack = 2f;
-                Debug.Log("buffing!");
-            }
-        }
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

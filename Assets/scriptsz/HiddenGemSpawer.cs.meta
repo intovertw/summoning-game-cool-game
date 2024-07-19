@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: a3ffed5c9e65f2f4d925e49a48cf385c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - hiddenGemPrefab: {fileID: -2253911629886400664, guid: e89e6ac774d2b5348b7bc16a5ccbfba1, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -13,12 +13,24 @@ PrefabInstance:
       value: hidden_gemprefab
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: e89e6ac774d2b5348b7bc16a5ccbfba1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: e89e6ac774d2b5348b7bc16a5ccbfba1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: e89e6ac774d2b5348b7bc16a5ccbfba1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: e89e6ac774d2b5348b7bc16a5ccbfba1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.03
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: e89e6ac774d2b5348b7bc16a5ccbfba1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2194935
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: e89e6ac774d2b5348b7bc16a5ccbfba1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: e89e6ac774d2b5348b7bc16a5ccbfba1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77,5 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937e02120facf8646a872859ee70e07a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hiddenGem: {fileID: 0}
-  range: 5
+  range: 4
+  enemy:
+    serializedVersion: 2
+    m_Bits: 8
+  buffedMoveSpeed: 4
+  buffedAttack: 2

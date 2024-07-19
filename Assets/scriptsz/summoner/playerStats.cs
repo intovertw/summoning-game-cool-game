@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerStats : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class playerStats : MonoBehaviour
     healthBar bar;
     petStats pet;
     Summon summon;
+    private GameSceneManager gameSceneManager;
 
     //get health bar which is outside this script (healthBar.cs)
     void Awake()
@@ -31,6 +33,7 @@ public class playerStats : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        gameSceneManager = FindObjectOfType<GameSceneManager>();
     }
 
     //checks for health changes and updates healthBar.cs
@@ -45,7 +48,11 @@ public class playerStats : MonoBehaviour
         }
         if (health <= 0)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+            if (gameSceneManager != null)
+            {
+                gameSceneManager.LoadMainMenu();
+            }
         }
 
         //pet
