@@ -45,7 +45,7 @@ public class playerStats : MonoBehaviour
         }
         if (health <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         //pet
