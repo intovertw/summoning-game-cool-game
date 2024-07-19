@@ -52,7 +52,7 @@ public class playerStats : MonoBehaviour
         petSummonsArray = GameObject.FindGameObjectsWithTag("Pet");
         petAmount = GameObject.FindGameObjectsWithTag("Pet").Length;
 
-        //manages 
+        //if the amount of pets is more than max, instead of creating a new pet, we move the oldest pet (i.e two max pets only, move first summoned pet, leave second)
         int nextPet = 0;
         if(petAmount > petMaxAmount - 1)
         {

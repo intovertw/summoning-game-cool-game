@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Summon : MonoBehaviour
 {
-    public GameObject objectToPlace; // The object to place
+    public GameObject summoningCircle, objectToPlace; // The object to place
     public float placementRange = 5f; // Maximum range around the character to place the object
     private Camera mainCam;
     private bool placingMode = false; // Flag to indicate if we are in placing mode
@@ -19,6 +19,7 @@ public class Summon : MonoBehaviour
     void Start()
     {
         mainCam = Camera.main;
+        summoningCircle.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,6 +28,7 @@ public class Summon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             animator.SetBool("isSummoning", true);
+            summoningCircle.SetActive(true);
             StartPlacingMode();
         }
 
@@ -39,12 +41,14 @@ public class Summon : MonoBehaviour
             {
                 rb.constraints = RigidbodyConstraints2D.None;
                 animator.SetBool("isSummoning", false);
+                summoningCircle.SetActive(false);
                 PlaceObject();
             }
             else if (Input.GetMouseButtonDown(1))
             {
                 rb.constraints = RigidbodyConstraints2D.None;
                 animator.SetBool("isSummoning", false);
+                summoningCircle.SetActive(false);
                 Invoke("enableShooting", 0.1f);
                 placingMode = false;
             }

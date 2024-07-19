@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 1370379289562713430}
   - component: {fileID: 5257784572282760355}
   - component: {fileID: 2254007809502145578}
+  - component: {fileID: -2531252176595306396}
   m_Layer: 3
   m_Name: slime-blue
   m_TagString: Enemy
@@ -263,6 +264,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.875, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &-2531252176595306396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075652657820661795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642279aae80a8b146b66ecf169e7a5b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: b1e716430d95afd488b50ca62a60dc2b, type: 2}
+  duration: 0
 --- !u!1 &1113727058639311144
 GameObject:
   m_ObjectHideFlags: 0
