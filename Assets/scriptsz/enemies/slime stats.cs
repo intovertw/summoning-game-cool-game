@@ -17,7 +17,9 @@ public class slimestats : MonoBehaviour
     //get relevant values outside script (healthBar.cs and chase ai)
     void Awake()
     {
+        //chase AI
         chaseScript = GetComponentInChildren<enemyChase>();
+        //health bar
         bar = GetComponentInChildren<healthBar>();
 
         health = maxHealth;

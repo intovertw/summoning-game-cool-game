@@ -9,11 +9,13 @@ public class HiddenGem : MonoBehaviour
     public LayerMask enemyMask;
     public float originalSpeed, originalAttack;
 
+    private Transform targets;
+
     public float range = 5f;
 
     slimestats enemy;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         enemy = GetComponent<slimestats>();
         originalSpeed = enemy.moveSpeed;
@@ -31,22 +33,24 @@ public class HiddenGem : MonoBehaviour
     {
         slimeStatistics = GameObject.FindGameObjectsWithTag("Enemy");
 
-        for (int i = 0; i < slimeStatistics.Length; i++)
-        {
-            enemy = slimeStatistics[i].GetComponent<slimestats>();
-            enemy.moveSpeed = originalSpeed;
-            enemy.attack = originalAttack;
-        }
-        FindTarget();
+        BuffTarget();
     }
 
-    void FindTarget()
+    bool CheckTargetIsInRange(Transform targets)
+    {
+        Debug.Log(Vector2.Distance(targets.position, transform.position) <= range);
+        return Vector2.Distance(targets.position, transform.position) <= range;      
+    }
+
+    void BuffTarget()
     {
         slimeStatistics = GameObject.FindGameObjectsWithTag("Enemy");
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, range, (Vector2)transform.position, 0f, enemyMask);
         if (hits.Length > 0)
         {
+            int j = 0;
+            targets = hits[j].transform;
             for (int i = 0; i < hits.Length; i++)
             {
                 enemy = slimeStatistics[i].GetComponent<slimestats>();
@@ -54,6 +58,7 @@ public class HiddenGem : MonoBehaviour
                 enemy.attack = 2f;
                 Debug.Log("buffing!");
             }
+            j++;
         }
     }
 }
