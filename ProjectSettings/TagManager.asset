@@ -5,19 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - background
-  - BulletSpawnPoint
-  - Enemy
-  - PlayerBullet
-  - EnemyBullet
-  - Pet
+  - enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - BulletPlayer
   - Water
   - UI
-  - 
+  - BulletEnemy
   - 
   - 
   - 
